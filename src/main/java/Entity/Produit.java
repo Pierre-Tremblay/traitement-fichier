@@ -18,9 +18,7 @@ public class Produit {
 
     @Column(name = "nomProduit", nullable = false)
     private String nomProduit;
-
-    @Column(name = "scoreNutritionnel")
-    private String scoreNutritionnel;
+    private ScoreNutritionnel scoreNutritionnel;
 
     @ManyToMany
     @JoinTable(name = "produits-ingredients",
@@ -76,11 +74,11 @@ public class Produit {
         this.nomProduit = nomProduit;
     }
 
-    public String getScoreNutritionnel() {
+    public ScoreNutritionnel getScoreNutritionnel() {
         return scoreNutritionnel;
     }
 
-    public void setScoreNutritionnel(String scoreNutritionnel) {
+    public void setScoreNutritionnel(ScoreNutritionnel scoreNutritionnel) {
         this.scoreNutritionnel = scoreNutritionnel;
     }
 

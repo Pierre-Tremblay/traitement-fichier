@@ -12,7 +12,7 @@ public class ReadFileManager {
 
 
     public static List<String[]> readFile() throws IOException {
-        File file = new File("E:\\Diginamic\\Maven\\ProjetMaven\\ traitement-fichier\\src\\main\\resources\\resources\\open-food-facts.csv");
+        File file = new File("src/main/resources/open-food-facts.csv");
         FileReader fr = new FileReader(file);
         CSVReader csvReader = new CSVReader(fr, '|');
 

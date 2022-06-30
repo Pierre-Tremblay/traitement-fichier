@@ -12,7 +12,7 @@ public class ConnexionJPA {
             try{
                 em = emf.createEntityManager();
             } catch (Exception e){
-                throw new DALException("Erreur lors de la connexion avec entityManager");
+                throw new DALException("Une erreur est survenue durant la connexion avec entityManager");
             }
         }
         return em;
