@@ -29,9 +29,13 @@ public class MarqueManager {
     //    Create
     public Marque create(Marque marque) throws BLLException {
         try {
-            marqueDAO.create(marque);
+            if(marqueDAO.selectByLibelle(marque.getLibelle()) == null && marque.getLibelle() != null) {
+                marqueDAO.create(marque);
+            } else {
+                return marqueDAO.selectByLibelle(marque.getLibelle());
+            }
         } catch (DALException e) {
-            throw new BLLException("ERREUR SURVENUE : Problème lors de l'insertion de l'marque", e);
+            throw new BLLException("Erreur lors de l'insertion de la marque", e);
         }
         return marque;
     }

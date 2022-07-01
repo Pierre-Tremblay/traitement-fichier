@@ -1,15 +1,20 @@
 package DAL;
 
+import BLL.PersistenceManager;
+import Entity.Additif;
 import Entity.Ingredient;
 import Entity.Marque;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MarqueDAO implements DAO<Marque> {
-
+    EntityManagerFactory emf = PersistenceManager.getInstance().getEntityManagerFactory();
+    EntityManager em = emf.createEntityManager();
     @Override
     public void create(Marque objet) throws DALException {
         try {
@@ -34,7 +39,7 @@ public class MarqueDAO implements DAO<Marque> {
 
     @Override
     public List<Marque> selectAll() throws DALException {
-        ResultSet rs;
+
         List<Marque> marqueList = new ArrayList<>();
         try {
             TypedQuery<Marque> selectAll = ConnexionJPA.getProperty().createQuery("SELECT a FROM Marque a", Marque.class);
@@ -48,5 +53,13 @@ public class MarqueDAO implements DAO<Marque> {
     @Override
     public Marque selectById(int id) throws DALException {
         return null;
+    }
+
+    public Marque selectByLibelle(String libelle) throws DALException {
+        try {
+            return em.createQuery("SELECT a FROM Marque a WHERE a.libelle = :libelle", Marque.class).setParameter("libelle", libelle).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

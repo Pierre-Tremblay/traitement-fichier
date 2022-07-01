@@ -1,7 +1,10 @@
 package DAL;
 
+import BLL.PersistenceManager;
 import Entity.Additif;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,7 +12,8 @@ import java.util.List;
 
 
 public class AdditifDAO implements DAO<Additif> {
-
+    EntityManagerFactory emf = PersistenceManager.getInstance().getEntityManagerFactory();
+    EntityManager em = emf.createEntityManager();
     @Override
     public void create(Additif objet) throws DALException {
         try {
@@ -49,5 +53,12 @@ public class AdditifDAO implements DAO<Additif> {
     @Override
     public Additif selectById(int id) throws DALException {
         return null;
+    }
+    public Additif selectByLibelle(String libelle) throws DALException {
+        try {
+            return em.createQuery("SELECT a FROM Additif a WHERE a.libelle = :libelle", Additif.class).setParameter("libelle", libelle).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

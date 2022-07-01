@@ -16,22 +16,22 @@ public class Produit {
     @JoinColumn(name = "id_marque")
     private Marque marque;
 
-    @Column(name = "nomProduit", nullable = false)
-    private String nomProduit;
+
+    @Enumerated(EnumType.STRING)
     private ScoreNutritionnel scoreNutritionnel;
 
     @ManyToMany
-    @JoinTable(name = "produits-ingredients",
+    @JoinTable(name = "produits_ingredients",
             joinColumns = @JoinColumn(name = "id_produit", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "id_ingredients", referencedColumnName = "id"))
     private Set<Ingredient> ingredients;
     @ManyToMany
-    @JoinTable(name = "produits-additifs",
+    @JoinTable(name = "produits_additifs",
             joinColumns = @JoinColumn(name = "id_produit", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "id_additif", referencedColumnName = "id"))
     private Set<Additif> additifs;
     @ManyToMany
-    @JoinTable(name = "produits-allergenes",
+    @JoinTable(name = "produits_allergenes",
             joinColumns = @JoinColumn(name = "id_produit", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "id_allergene", referencedColumnName = "id"))
     private Set<Allergene> allergenes;
@@ -66,13 +66,7 @@ public class Produit {
         this.marque = marque;
     }
 
-    public String getNomProduit() {
-        return nomProduit;
-    }
 
-    public void setNomProduit(String nomProduit) {
-        this.nomProduit = nomProduit;
-    }
 
     public ScoreNutritionnel getScoreNutritionnel() {
         return scoreNutritionnel;

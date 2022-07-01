@@ -29,12 +29,17 @@ public class AdditifManager {
     //    Create
     public Additif create(Additif additif) throws BLLException {
         try {
-            additifDAO.create(additif);
+            if (additifDAO.selectByLibelle(additif.getLibelle()) == null && additif.getLibelle() != null) {
+                additifDAO.create(additif);
+            } else {
+                return null;
+            }
         } catch (DALException e) {
-            throw new BLLException("ERREUR SURVENUE : Problème lors de l'insertion de l'additif", e);
+            throw new BLLException("Erreur lors de l'insertion de l'additif", e);
         }
         return additif;
     }
+
 
     //    Read
     public List<Additif> selectAll() throws BLLException {

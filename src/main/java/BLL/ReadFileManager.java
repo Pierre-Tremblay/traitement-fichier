@@ -15,9 +15,7 @@ public class ReadFileManager {
         File file = new File("src/main/resources/open-food-facts.csv");
         FileReader fr = new FileReader(file);
         CSVReader csvReader = new CSVReader(fr, '|');
-
         List<String[]> data = new ArrayList<>();
-
         String[] nextLine;
         while ((nextLine = csvReader.readNext()) != null) {
             int size = nextLine.length;

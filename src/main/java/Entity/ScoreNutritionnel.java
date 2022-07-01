@@ -8,6 +8,4 @@ public enum ScoreNutritionnel {
     E,
     F;
 
-    ScoreNutritionnel() {
-    }
 }

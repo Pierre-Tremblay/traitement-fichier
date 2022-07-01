@@ -29,7 +29,11 @@ public class IngredientManager {
     //    Create
     public Ingredient create(Ingredient ingredient) throws BLLException {
         try {
-            ingredientDAO.create(ingredient);
+            if (ingredientDAO.selectByLibelle(ingredient.getLibelle()) == null && ingredient.getLibelle() != null) {
+                ingredientDAO.create(ingredient);
+            } else {
+                return null;
+            }
         } catch (DALException e) {
             throw new BLLException("ERREUR SURVENUE : Problème lors de l'insertion de l'ingredient", e);
         }

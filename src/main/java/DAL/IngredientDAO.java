@@ -1,15 +1,20 @@
 package DAL;
 
+import BLL.PersistenceManager;
+import Entity.Additif;
 import Entity.Categorie;
 import Entity.Ingredient;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientDAO implements DAO<Ingredient> {
-
+    EntityManagerFactory emf = PersistenceManager.getInstance().getEntityManagerFactory();
+    EntityManager em = emf.createEntityManager();
     @Override
     public void create(Ingredient objet) throws DALException {
         try {
@@ -49,4 +54,12 @@ public class IngredientDAO implements DAO<Ingredient> {
     public Ingredient selectById(int id) throws DALException {
         return null;
     }
+    public Ingredient selectByLibelle(String libelle) throws DALException {
+        try {
+            return em.createQuery("SELECT a FROM Ingredient a WHERE a.libelle = :libelle", Ingredient.class).setParameter("libelle", libelle).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

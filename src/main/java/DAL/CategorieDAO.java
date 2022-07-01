@@ -1,15 +1,20 @@
 package DAL;
 
+import BLL.PersistenceManager;
+import Entity.Additif;
 import Entity.Allergene;
 import Entity.Categorie;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategorieDAO implements DAO<Categorie> {
-
+    EntityManagerFactory emf = PersistenceManager.getInstance().getEntityManagerFactory();
+    EntityManager em = emf.createEntityManager();
     @Override
     public void create(Categorie objet) throws DALException {
         try {
@@ -48,5 +53,12 @@ public class CategorieDAO implements DAO<Categorie> {
     @Override
     public Categorie selectById(int id) throws DALException {
         return null;
+    }
+    public Categorie selectByLibelle(String libelle) throws DALException {
+        try {
+            return em.createQuery("SELECT a FROM Categorie a WHERE a.libelle = :libelle", Categorie.class).setParameter("libelle", libelle).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

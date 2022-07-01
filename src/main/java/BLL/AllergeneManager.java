@@ -29,7 +29,11 @@ public class AllergeneManager {
     //    Create
     public Allergene create(Allergene allergene) throws BLLException {
         try {
-            allergeneDAO.create(allergene);
+            if (allergeneDAO.selectByLibelle(allergene.getLibelle()) == null && allergene.getLibelle() != null) {
+                allergeneDAO.create(allergene);
+            } else {
+                return null;
+            }
         } catch (DALException e) {
             throw new BLLException("ERREUR SURVENUE : Problème lors de l'insertion de l'allergene", e);
         }

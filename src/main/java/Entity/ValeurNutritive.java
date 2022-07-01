@@ -4,7 +4,7 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class ValeurNutritive {
-    private String scoreNutritionnel;
+
     private String energies;
     private String graisses;
     private String sucres;
@@ -32,13 +32,6 @@ public class ValeurNutritive {
     public ValeurNutritive() {
     }
 
-    public String getScoreNutritionnel() {
-        return scoreNutritionnel;
-    }
-
-    public void setScoreNutritionnel(String scoreNutritionnel) {
-        this.scoreNutritionnel = scoreNutritionnel;
-    }
 
     public String getEnergies() {
         return energies;
@@ -227,7 +220,7 @@ public class ValeurNutritive {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ValeurNutritive{");
-        sb.append("scoreNutritionnel='").append(scoreNutritionnel).append('\'');
+
         sb.append(", energies='").append(energies).append('\'');
         sb.append(", graisses='").append(graisses).append('\'');
         sb.append(", sucres='").append(sucres).append('\'');

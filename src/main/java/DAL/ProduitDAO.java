@@ -1,5 +1,6 @@
 package DAL;
 
+import Entity.Additif;
 import Entity.Marque;
 import Entity.Produit;
 
@@ -53,4 +54,5 @@ public class ProduitDAO implements DAO<Produit> {
     public Produit selectById(int id) throws DALException {
         return null;
     }
+
 }

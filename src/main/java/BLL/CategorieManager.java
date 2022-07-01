@@ -29,7 +29,11 @@ public class CategorieManager {
     //    Create
     public Categorie create(Categorie categorie) throws BLLException {
         try {
-            categorieDAO.create(categorie);
+            if (categorieDAO.selectByLibelle(categorie.getLibelle()) == null && categorie.getLibelle() != null) {
+                categorieDAO.create(categorie);
+            } else {
+                return null;
+            }
         } catch (DALException e) {
             throw new BLLException("ERREUR SURVENUE : Problème lors de l'insertion de l'categorie", e);
         }
